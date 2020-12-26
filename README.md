@@ -1,52 +1,52 @@
-# 一键Shadowsocks+V2Ray-plugin快速部署到Heroku
+# One-click Shadowsocks+V2Ray-plugin to quickly deploy to Heroku
 
-点击下面按钮部署,好用的话记得点个Star：
+Click the button below to deploy, and remember to click Star if it works:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 - - -
 
-原生V2Ray部署： <https://github.com/ygcaicn/v2ray-heroku>
+Native V2Ray Department: <https://github.com/ygcaicn/v2ray-heroku>
 
 - - -
 
-## 0. 注意
+## 0. Attention
 
-部署需要注册heroku帐号，注册heroku帐号时需要梯子（否则验证码刷不出来），需要一个能正常接收验证码的邮箱（@qq.com，@163.com都不行），有条件gmail
-最好，没条件这里推荐outlook <https://login.live.com/>。
+Deployment requires registration of a heroku account, a ladder is required when registering a heroku account (otherwise the verification code cannot be brushed out), an email address that can receive verification codes normally (@qq.com, @163.com are not acceptable), gmail is conditional
+Best, no conditions recommend outlook <https://login.live.com/> here.
 
-## 1. 验证
+## 1. Verification
 
-服务端部署后，点 open app,能正常显示网页，地址补上path后(例如：<https://test.herokuapp.com/static>)访问显示404页面，表示部署成功。
+After the server is deployed, click open app to display the webpage normally. After the address is added to the path (for example: <https://test.herokuapp.com/static>), the 404 page is displayed, indicating that the deployment is successful.
 
-## 2. 客户端配置
+## 2. Client Configuration
 
-二维码地址： https://test.herokuapp.com/qr_img/v2.png
-(test改成自己的app名称，如果更改了QR_Path，同时也要将对应的qr_img改成修改后的)
+QR code address: https://test.herokuapp.com/qr_img/v2.png
+(Change test to your own app name, if you change QR_Path, also change the corresponding qr_img to the modified one)
 
-使用客户端扫描二维码即可。
+Use the client to scan the QR code.
 
-**或者**
+**or**
 
-配置文件地址：https://test.herokuapp.com/qr_img
+Configuration file address: https://test.herokuapp.com/qr_img
 
-打开后复制，在客户端导入即可。
+Copy after opening and import it on the client.
 
-**或者**
+**or**
 
-手动配置：
+Manual configuration:
 
 ```sh
-Server: test.herokuapp.com （test换为你的app名称）
+Server: test.herokuapp.com (change test to your app name)
 Port: 443
-Password: 部署时填写的密码
-Encry Method： RC4-MD5 （或者你填写的其它方式）
+Password: The password filled in during deployment
+Encry Method: RC4-MD5 (or other methods you fill in)
 Plugin: v2ray
 Plugin Transport mode: websocket-tls
 Hostname: 同Server
-Path： 你部署时填写的路径
+Path: The path you filled in during deployment
 ```
 
-没有客户端的也可以从这里下载(Android)：
+Those without a client can also download from here (Android):
 
 [shadowsocks](https://github.com/shadowsocks/shadowsocks-android/releases/download/v5.0.5/shadowsocks--universal-5.0.5.apk)
 
@@ -56,17 +56,17 @@ windows:
 
 <https://github.com/shadowsocks/shadowsocks-windows/wiki/Shadowsocks-Windows-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E>
 
-## 3. 更新
+## 3. Update
 
-更新 v2ray-plugin 版本，访问 <https://dashboard.heroku.com/apps> 选择部署好的app，如果VER变量为 latest。直接选择More --> Restart all dynos, 程序自动重启，可通过view Logs确认进度。（更新指定版本： Settings --> Reveal Config Varsapp -->VER，修改成需要的版本号，例如 1.2）
+To update the v2ray-plugin version, visit <https://dashboard.heroku.com/apps> to select the deployed app, if the VER variable is latest. Directly select More --> Restart all dynos, the program will restart automatically, and the progress can be confirmed through view Logs. (Update the specified version: Settings --> Reveal Config Varsapp -->VER, modify it to the required version number, such as 1.2)
 
-2020/03/01当前版本使用正常：
+2020/03/01 The current version is working normally:
 
 + shadowsocks-libev: 3.3.4+ds-2(debian apt)
 
 + v2ray-plugin: v1.3.0
 
-# 参考
+# Reference
 
 https://github.com/xiangrui120/v2ray-heroku-undone
 
