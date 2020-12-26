@@ -1,4 +1,4 @@
-# One-click Shadowsocks+V2Ray-plugin to quickly deploy to Heroku
+# One-click Shadowsocks+V2Ray-plugin to quickly deploy to Heroku.
 
 Click the button below to deploy, and remember to click Star if it works:
 
