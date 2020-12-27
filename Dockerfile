@@ -6,6 +6,7 @@ RUN set -ex\
     && apt install -y wget unzip qrencode\
     && apt install -y shadowsocks-libev\
     && apt install -y nginx\
+    && apt install -y git\
     && apt install -y --no-install-recommends build-essential autoconf libtool libssl-dev libpcre3-dev libev-dev asciidoc xmlto automake \
     && cd /tmp \
     && git clone https://github.com/shadowsocks/simple-obfs.git \
