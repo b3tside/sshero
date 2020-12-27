@@ -26,6 +26,10 @@ if [[ -z "${QR_Path}" ]]; then
 fi
 echo ${QR_Path}
 
+if [[ -z "${PLUGINS}" ]]; then
+  PLUGINS="v2ray"
+fi
+echo ${PLUGINS}
 
 if [ "$VER" = "latest" ]; then
   V_VER=`wget -qO- "https://api.github.com/repos/shadowsocks/v2ray-plugin/releases/latest" | sed -n -r -e 's/.*"tag_name".+?"([vV0-9\.]+?)".*/\1/p'`
@@ -61,6 +65,15 @@ sed -e "/^#/d"\
 echo /etc/shadowsocks-libev/config.json
 cat /etc/shadowsocks-libev/config.json
 
+# TODO: bug when PASSWORD contain '/'
+sed -e "/^#/d"\
+    -e "s/\${PASSWORD}/${PASSWORD}/g"\
+    -e "s/\${ENCRYPT}/${ENCRYPT}/g"\
+    -e "s|\${FAILOVER}|${FAILOVER}|g"\
+    /conf/shadowsock-obfs.json >  /etc/shadowsocks-libev/config-obfs.json
+echo /etc/shadowsocks-libev/config-obfs.json
+cat /etc/shadowsocks-libev/config-obfs.json
+
 if [[ -z "${ProxySite}" ]]; then
   s="s/proxy_pass/#proxy_pass/g"
   echo "site:use local wwwroot html"
@@ -83,12 +96,21 @@ if [ "$AppName" = "no" ]; then
   echo "不生成二维码"
 else
   [ ! -d /wwwroot/${QR_Path} ] && mkdir /wwwroot/${QR_Path}
-  plugin=$(echo -n "v2ray;path=${V2_Path};host=${AppName}.herokuapp.com;tls" | sed -e 's/\//%2F/g' -e 's/=/%3D/g' -e 's/;/%3B/g')
+  if [ "$PLUGINS" = "obfs" ]; then
+    plugin=$(echo -n "obfs-local;obfs-uri=/;obfs=http;obfs-host=youtube.com" | sed -e 's/\//%2F/g' -e 's/=/%3D/g' -e 's/;/%3B/g')
+  else
+    plugin=$(echo -n "v2ray;path=${V2_Path};host=${AppName}.herokuapp.com;tls" | sed -e 's/\//%2F/g' -e 's/=/%3D/g' -e 's/;/%3B/g')
+  fi
   ss="ss://$(echo -n ${ENCRYPT}:${PASSWORD} | base64 -w 0)@${AppName}.herokuapp.com:443?plugin=${plugin}" 
   echo "${ss}" | tr -d '\n' > /wwwroot/${QR_Path}/index.html
   echo -n "${ss}" | qrencode -s 6 -o /wwwroot/${QR_Path}/v2.png
 fi
 
-ss-server -c /etc/shadowsocks-libev/config.json &
+if [ "$PLUGINS" = "obfs" ]; then
+  ss-server -c /etc/shadowsocks-libev/config-obfs.json &
+else
+  ss-server -c /etc/shadowsocks-libev/config.json &
+fi
+
 rm -rf /etc/nginx/sites-enabled/default
 nginx -g 'daemon off;'
