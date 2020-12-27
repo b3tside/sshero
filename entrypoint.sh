@@ -97,7 +97,7 @@ if [ "$AppName" = "no" ]; then
 else
   [ ! -d /wwwroot/${QR_Path} ] && mkdir /wwwroot/${QR_Path}
   if [ "$PLUGINS" = "obfs" ]; then
-    plugin=$(echo -n "obfs-local;obfs-uri=/;obfs=http;obfs-host=youtube.com" | sed -e 's/\//%2F/g' -e 's/=/%3D/g' -e 's/;/%3B/g')
+    plugin=$(echo -n "obfs-local;obfs-uri=/;obfs=tls;obfs-host=youtube.com" | sed -e 's/\//%2F/g' -e 's/=/%3D/g' -e 's/;/%3B/g')
   else
     plugin=$(echo -n "v2ray;path=${V2_Path};host=${AppName}.herokuapp.com;tls" | sed -e 's/\//%2F/g' -e 's/=/%3D/g' -e 's/;/%3B/g')
   fi
