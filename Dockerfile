@@ -10,7 +10,7 @@ RUN set -ex\
     && apt install -y --no-install-recommends build-essential autoconf libtool libssl-dev libpcre3-dev libev-dev asciidoc xmlto automake \
     && cd /tmp \
     && git clone https://github.com/shadowsocks/simple-obfs.git \
-    && cd /simple-obfs \
+    && cd simple-obfs \
     && git submodule update --init --recursive \
     && ./autogen.sh \
     && ./configure && make \
