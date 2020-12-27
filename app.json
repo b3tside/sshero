@@ -3,15 +3,18 @@
   "description": "Deploy Shadowsocks+V2Ray-plugin to Heroku.",
   "keywords": ["V2ray", "Shadowsocks", "V2Ray-plugin"],
   "env": {
-     "ENCRYPT": {
+    "ENCRYPT": {
       "description": "加密方式，由于有https加持，选最简单的就可以，默认：rc4-md5,其它的有（aes-256-cfb,chacha20-ietf-poly1305,salsa20,chacha20-ietf等.）",
       "value": "rc4-md5"
     },
-     "PASSWORD": {
+    "PASSWORD": {
       "description": "shadowsocks的密码，可以使用uuid作为密码（http://www.uuid.online/在线生成）",
       "value": "5c301bb8-6c77-41a0-a606-4ba11bbab084"
+    },    
+    "PLUGINS": {
+      "description": "v2ray or obfs",
+      "value": "v2ray"
     },
-
     "VER": {
        "description": "v2ray-plugin版本，默认latest安装最新版本，可以去https://github.com/shadowsocks/v2ray-plugin/releasesV2Ray选择版本 （例如：1.1.0)",
        "value": "latest"
